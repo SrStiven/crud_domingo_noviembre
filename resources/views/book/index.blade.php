@@ -93,7 +93,7 @@
             </thead>
             @foreach ($books as $book)
                 <tbody>
-                    <tr>
+                    <tr style="{{ $book->active ? '' : 'background-color:red' }}" >
                         <th>{{$book->name}}</th>
                         <th>{{$book->title}}</th>
                         <th>{{$book->count}}</th>
