@@ -1,7 +1,14 @@
 <?php
 
+use App\Http\Controllers\BooksController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[BooksController::class, 'index'])->name('book.index');
+
+Route::post('/guardar',[BooksController::class, 'create'])->name('book.create');
+
+Route::put('/actualizar',[BooksController::class, 'update'])->name('book.update');
+
+Route::get('/edit/{book}',[BooksController::class, 'edit'])->name('book.edit');
+
+Route::get('/delete/{book}',[BooksController::class, 'delete'])->name('book.delete');

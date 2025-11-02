@@ -1,3 +1,89 @@
-<div>
-    <!-- Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less. - Marie Curie -->
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <h2>Crear libros</h2>
+        <form action="{{ route('book.create') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div>
+            <label>Nombre del autor</label>
+            <input type="text" name="name" required>
+        </div>
+        <br>
+        <div>
+            <label>Titulo del autor</label>
+            <input type="text" name="title" required>
+        </div>
+        <br>
+        <div>
+            <label>Cantidad de libros</label>
+            <input type="number" name="count" min="0" required>
+        </div>
+        <br>
+        <div>
+            <label>Genero del libro</label>
+            <select name="gender" required>
+                <option value="">Seleccionar</option>
+                <option value="accion">Accion</option>
+                <option value="comedia">Comedia</option>
+                <option value="ficcion">Ficcion</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <label>Fecha de vencimiento del libro</label>
+            <input type="date" name="due_date" required>
+        </div>
+        <br>
+        <div>
+            <label>Subir un archivo</label>
+            <input type="file" name="file" required>
+        </div>
+        <br>
+        <button type="submit">Enviar</button>
+        </form>
+        <hr>
+
+        <table border="1">
+
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Titulo</th>
+                    <th>Cantidad</th>
+                    <th>Genero</th>
+                    <th>Fecha</th>
+                    <th>Archivo</th>
+                    <th>Accion</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            @foreach ($books as $book)
+                <tbody>
+                    <tr>
+                        <th>{{$book->name}}</th>
+                        <th>{{$book->title}}</th>
+                        <th>{{$book->count}}</th>
+                        <th>{{$book->gender}}</th>
+                        <th>{{$book->due_date}}</th>
+                        <th>
+                            @if ($book->file_path)
+                                <a href="{{ asset('storage/' . $book->file_path) }}" target="_blank">Ver archivo</a>
+                            @else
+                                <span>Sin archivo</span>    
+                            @endif
+                            
+                        </th>
+                        <th><a href="{{ route('book.edit',$book->id) }}">Editar</a></th>
+                        <th><a href="{{ route('book.delete',$book->id) }}">Eliminar</a></th>
+                    </tr>
+                </tbody>
+            @endforeach
+        </table>
+</body>
+</html>
