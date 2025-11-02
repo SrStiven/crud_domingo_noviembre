@@ -48,7 +48,35 @@
         <button type="submit">Enviar</button>
         </form>
         <hr>
-
+        <div>
+            <h2>Eliminar todos los libros</h2>
+            <form action="{{ route('book.destroy') }}" method="POST" onsubmit="return confirm('Estas seguro?')">
+                @csrf
+                <Div>
+                    <label>Boton de eliminar todos los libros</label>
+                    <button type="submit">Eliminar</button>
+                </Div>
+            </form>
+        </div>
+        <hr>
+        <div>
+            <h2>Exportar y Importar</h2>
+            <br>
+            <div>
+                <label>Exportar</label>
+                <a href="{{ route('book.export') }}">Exportar libros</a>
+            </div>
+            <br>
+            <form action="{{ route('book.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div>
+                    <label>Importar libros</label>
+                    <input type="file" name="file">
+                </div>
+                <button type="submit">Cargar Archivo</button>
+            </form>
+        </div>
+        <hr>
         <table border="1">
 
             <thead>

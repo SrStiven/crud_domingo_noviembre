@@ -12,3 +12,13 @@ Route::put('/actualizar',[BooksController::class, 'update'])->name('book.update'
 Route::get('/edit/{book}',[BooksController::class, 'edit'])->name('book.edit');
 
 Route::get('/delete/{book}',[BooksController::class, 'delete'])->name('book.delete');
+
+//Destroy
+
+Route::post('/destroyAll',[BooksController::class, 'destroy'])->name('book.destroy');
+
+//Export y import
+
+Route::get('/libros/export',[BooksController::class, 'exportExcel'])->name('book.export');
+
+Route::post('/libros/import',[BooksController::class, 'importExcel'])->name('book.import');
